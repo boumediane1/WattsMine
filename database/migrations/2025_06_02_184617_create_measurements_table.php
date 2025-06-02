@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('history', function (Blueprint $table) {
+        Schema::create('measurements', function (Blueprint $table) {
             $table->id();
             $table->integer('active_power_production');
             $table->integer('active_power_grid');
             $table->integer('active_power_load');
             $table->integer('active_power_battery');
-            $table->timestamps();
+            $table->timestamp('measured_at');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('history');
+        Schema::dropIfExists('measurements');
     }
 };
