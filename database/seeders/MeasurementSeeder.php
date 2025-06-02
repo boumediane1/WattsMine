@@ -18,14 +18,20 @@ class MeasurementSeeder extends Seeder
 
         $yesterday = now()->addDays(-1);
 
-        for ($i = 0; $i < 86_400; $i += 10) {
-            $measurement = Measurement::factory()->make([
+        for ($i = 0; $i < 86_400; $i += 5) {
+            $measurement = [
+                'active_power_production' => fake()->numberBetween(3000, 5000),
+                'active_power_grid' => fake()->numberBetween(3000, 5000),
+                'active_power_load' => fake()->numberBetween(3000, 5000),
+                'active_power_battery' => fake()->numberBetween(3000, 5000),
                 'measured_at' => $yesterday->clone()->addSeconds($i)
-            ])->getAttributes();
+            ];
 
             $measurements[] = $measurement;
         }
 
-        DB::table('measurements')->insert($measurements);
+        foreach (array_chunk($measurements, 1000) as $chunk) {
+            Measurement::query()->insert($chunk);
+        }
     }
 }
