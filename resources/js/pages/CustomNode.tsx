@@ -7,10 +7,10 @@ type CustomNodeData = {
     value: string;
 };
 
-const CustomNode: React.FC<NodeProps<CustomNodeData>> = ({ data }) => {
+const CustomNode: React.FC<NodeProps<CustomNodeData>> = ({ data, sourcePosition, targetPosition }) => {
     return (
         <div>
-            <img src={data.image} className="mx-auto w-12" alt="" />
+            <img src={data.image} className="mx-auto w-16" alt="" />
 
             <div
                 className="mt-1 text-center text-xs font-bold"
@@ -21,8 +21,8 @@ const CustomNode: React.FC<NodeProps<CustomNodeData>> = ({ data }) => {
                 {data.value} W
             </div>
 
-            <Handle type="source" position={Position.Bottom} style={{ opacity: 0 }} />
-            <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
+            <Handle type="source" position={sourcePosition ?? Position.Bottom} style={{ opacity: 0 }} />
+            <Handle type="target" position={targetPosition ?? Position.Top} style={{ opacity: 0 }} />
         </div>
     );
 };
