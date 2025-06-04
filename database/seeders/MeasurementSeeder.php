@@ -12,39 +12,16 @@ class MeasurementSeeder extends Seeder
      */
     public function run(): void
     {
+        Measurement::query()->delete();
+
         $measurements = [];
 
-        $yesterday = now()->addDays(-1);
+        $yesterday = now()->subDay();
 
-        for ($i = 0; $i < 86_400; $i += 1) {
-            $solar_arrays = [];
-
-            for ($j = 1; $j <= 4; $j++) {
-                $solar_array = [
-                    'title' => "Solar Array $j",
-                    'active_power' => 12
-                ];
-                $solar_arrays[] = $solar_array;
-            }
-
-            $load = [
-                [
-                    'title' => 'Pool & Cave Total',
-                    'active_power' => 1612
-                ],
-                [
-                    'title' => 'Rack UPS',
-                    'active_power' => 674
-                ]
-            ];
-
-            $measurement = [
-                'utility_grid_active_power' => 2221,
-                'solar_arrays' => json_encode($solar_arrays),
-                'consumption' => json_encode($load),
-                'measured_at' => $yesterday->clone()->addSeconds($i)
-            ];
-
+        for ($i = 0; $i < 86_400; $i += 5) {
+            $measurement = Measurement::factory()->make([
+                'measured_at' => $yesterday->addSecond()
+            ])->getAttributes();
             $measurements[] = $measurement;
         }
 
