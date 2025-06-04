@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Measurement;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class MeasurementSeeder extends Seeder
 {
@@ -18,12 +16,32 @@ class MeasurementSeeder extends Seeder
 
         $yesterday = now()->addDays(-1);
 
-        for ($i = 0; $i < 86_400; $i += 5) {
+        for ($i = 0; $i < 86_400; $i += 1) {
+            $solar_arrays = [];
+
+            for ($j = 1; $j <= 4; $j++) {
+                $solar_array = [
+                    'title' => "Solar Array $j",
+                    'active_power' => 12
+                ];
+                $solar_arrays[] = $solar_array;
+            }
+
+            $load = [
+                [
+                    'title' => 'Pool & Cave Total',
+                    'active_power' => 1612
+                ],
+                [
+                    'title' => 'Rack UPS',
+                    'active_power' => 674
+                ]
+            ];
+
             $measurement = [
-                'active_power_production' => fake()->numberBetween(3000, 5000),
-                'active_power_grid' => fake()->numberBetween(3000, 5000),
-                'active_power_load' => fake()->numberBetween(3000, 5000),
-                'active_power_battery' => fake()->numberBetween(3000, 5000),
+                'utility_grid_active_power' => 2221,
+                'solar_arrays' => json_encode($solar_arrays),
+                'consumption' => json_encode($load),
                 'measured_at' => $yesterday->clone()->addSeconds($i)
             ];
 

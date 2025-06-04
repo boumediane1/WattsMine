@@ -17,7 +17,10 @@ export default function Dashboard() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
+
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+                <h2 className="text-xl font-semibold tracking-tight">Dashboard</h2>
+
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2">
                         <ChartAreaInteractive />
