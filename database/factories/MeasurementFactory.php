@@ -34,8 +34,8 @@ class MeasurementFactory extends Factory
 
         return [
             'utility_grid_active_power' => 2221,
-            'solar_arrays' => json_encode($solar_arrays),
-            'consumption' => json_encode($load),
+            'solar_arrays' => $solar_arrays,
+            'consumption' => $load,
             'measured_at' => now()
         ];
     }

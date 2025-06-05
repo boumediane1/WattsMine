@@ -20,7 +20,7 @@ class MeasurementSeeder extends Seeder
 
         for ($i = 0; $i < 86_400; $i += 5) {
             $measurement = Measurement::factory()->make([
-                'measured_at' => $yesterday->addSecond()
+                'measured_at' => $yesterday->copy()->addSeconds($i)
             ])->getAttributes();
             $measurements[] = $measurement;
         }
