@@ -14,6 +14,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('monitoring', function () {
         return Inertia::render('monitoring');
     });
+
+    Route::get('breakers', function () {
+        return Inertia::render('breakers');
+    });
 });
 
 require __DIR__.'/settings.php';
