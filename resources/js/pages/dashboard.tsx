@@ -45,7 +45,7 @@ export default function Dashboard() {
                         <ChartLineMultiple data={props.data} />
                     </div>
 
-                    <div className="col-span-1 space-y-4">
+                    <div className="col-span-1 flex flex-col gap-4">
                         <Card>
                             <CardHeader>
                                 <CardTitle>Battery usage</CardTitle>
@@ -63,7 +63,7 @@ export default function Dashboard() {
                             </CardContent>
                         </Card>
 
-                        <Card className="h-[464px]">
+                        <Card className="h-full">
                             <CardHeader>
                                 <CardTitle>Power Flow</CardTitle>
                             </CardHeader>
