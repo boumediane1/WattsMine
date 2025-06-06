@@ -16,10 +16,24 @@ class MeasurementFactory extends Factory
      */
     public function definition(): array
     {
-        $solar_arrays = array_map(fn($i) => [
-            'title' => "Solar Array $i",
-            'active_power' => 12
-        ], range(1, 4));
+        $solar_arrays = [
+            [
+                'title' => "Solar Array 1",
+                'active_power' => fake()->numberBetween(900, 1000)
+            ],
+            [
+                'title' => "Solar Array 2",
+                'active_power' => fake()->numberBetween(800, 900)
+            ],
+            [
+                'title' => "Solar Array 3",
+                'active_power' => fake()->numberBetween(70, 80)
+            ],
+            [
+                'title' => "Solar Array 4",
+                'active_power' => fake()->numberBetween(20, 30)
+            ],
+        ];
 
         $load = [
             [

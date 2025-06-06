@@ -82,6 +82,7 @@ test('retrieves real time utility grid active power', function () {
 test('should correctly aggregate solar production and consumption', function () {
     $this->actingAs(User::factory()->create());
 
+    $this->withoutExceptionHandling();
     $now = now();
 
     Measurement::factory()->create([
@@ -93,7 +94,8 @@ test('should correctly aggregate solar production and consumption', function () 
             ['title' => 'Television', 'active_power' => 3],
             ['title' => 'Washing Machine', 'active_power' => 4],
         ],
-        'measured_at' => $now->copy()->subHour()
+        'utility_grid_active_power' => 100,
+        'measured_at' => '2025-06-04 22:00:00'
     ]);
 
     Measurement::factory()->create([
@@ -105,20 +107,36 @@ test('should correctly aggregate solar production and consumption', function () 
             ['title' => 'Solar Array 1', 'active_power' => 7],
             ['title' => 'Solar Array 2', 'active_power' => 8],
         ],
-        'measured_at' => $now
+        'utility_grid_active_power' => 200,
+        'measured_at' => '2025-06-04 22:00:01',
+    ]);
+
+    Measurement::factory()->create([
+        'solar_arrays' => [
+            ['title' => 'Solar Array 1', 'active_power' => 9],
+            ['title' => 'Solar Array 2', 'active_power' => 10],
+        ],
+        'consumption' => [
+            ['title' => 'Solar Array 1', 'active_power' => 11],
+            ['title' => 'Solar Array 2', 'active_power' => 12],
+        ],
+        'utility_grid_active_power' => 300,
+        'measured_at' => '2025-06-04 23:00:00'
     ]);
 
     $this->get('/dashboard')->assertInertia(fn(AssertableInertia $page) => $page
         ->component('dashboard')->where('data', [
             [
-                'date' => $now->copy()->subHour()->toDateTimeString(),
-                'production' => 3,
-                'consumption' => 7
+                'date' => '2025-06-04 22:00:00',
+                'production' => 7,
+                'consumption' => 11,
+                'utility_grid_active_power' => 150,
             ],
             [
-                'date' => $now->toDateTimeString(),
-                'production' => 11,
-                'consumption' => 15
+                'date' => '2025-06-04 23:00:00',
+                'production' => 19,
+                'consumption' => 23,
+                'utility_grid_active_power' => 300,
             ],
         ])
     );

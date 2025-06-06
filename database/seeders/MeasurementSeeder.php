@@ -18,7 +18,7 @@ class MeasurementSeeder extends Seeder
 
         $yesterday = now()->subDay();
 
-        for ($i = 0; $i < 86_400; $i += 5) {
+        for ($i = 0; $i < 86_400; $i++) {
             $measurement = Measurement::factory()->make([
                 'measured_at' => $yesterday->copy()->addSeconds($i)
             ])->getAttributes();
