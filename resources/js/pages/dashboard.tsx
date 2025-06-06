@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import AppLayout from '@/layouts/app-layout';
 import { History, type BreadcrumbItem } from '@/types';
@@ -33,9 +34,17 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                     <h2 className="text-xl font-semibold tracking-tight">Dashboard</h2>
 
-                    <div className="flex gap-4">
-                        <Input type="date" />
-                        <Input type="date" />
+                    <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                            <Label htmlFor="from">From</Label>
+                            <Input id="from" type="date" />
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                            <Label htmlFor="to">To</Label>
+                            <Input id="to" type="date" />
+                        </div>
+
                         <Button>Export</Button>
                     </div>
                 </div>
@@ -48,7 +57,7 @@ export default function Dashboard() {
                     <div className="col-span-1 flex flex-col gap-4">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Battery usage</CardTitle>
+                                <CardTitle className="capitalize">Battery usage</CardTitle>
                             </CardHeader>
 
                             <CardContent className="space-y-4">
@@ -65,7 +74,7 @@ export default function Dashboard() {
 
                         <Card className="h-full">
                             <CardHeader>
-                                <CardTitle>Power Flow</CardTitle>
+                                <CardTitle className="capitalize">Power distribution</CardTitle>
                             </CardHeader>
 
                             <CardContent className="h-full">

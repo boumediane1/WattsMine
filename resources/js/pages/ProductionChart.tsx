@@ -34,7 +34,7 @@ export function ChartLineMultiple({ data }: { data: History[] }) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Line Chart - Multiple</CardTitle>
+                <CardTitle className="capitalize">Power overview</CardTitle>
                 <CardDescription>January - June 2024</CardDescription>
             </CardHeader>
             <CardContent>
