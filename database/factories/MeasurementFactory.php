@@ -19,19 +19,19 @@ class MeasurementFactory extends Factory
         $solar_arrays = [
             [
                 'title' => "Solar Array 1",
-                'active_power' => fake()->numberBetween(900, 1000)
+                'active_power' => fake()->numberBetween(0, 1000)
             ],
             [
                 'title' => "Solar Array 2",
-                'active_power' => fake()->numberBetween(800, 900)
+                'active_power' => fake()->numberBetween(0, 900)
             ],
             [
                 'title' => "Solar Array 3",
-                'active_power' => fake()->numberBetween(70, 80)
+                'active_power' => fake()->numberBetween(0, 80)
             ],
             [
                 'title' => "Solar Array 4",
-                'active_power' => fake()->numberBetween(20, 30)
+                'active_power' => fake()->numberBetween(0, 30)
             ],
         ];
 

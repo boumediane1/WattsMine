@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
@@ -7,7 +7,7 @@ import AppLayout from '@/layouts/app-layout';
 import { History, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import 'reactflow/dist/style.css';
-import { ChartLineMultiple } from './ProductionChart';
+import { ChartBarDefault } from './ProductionChart';
 import SolarPVSystem from './SolarPVSystem';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -25,6 +25,11 @@ type Props = {
 
 export default function Dashboard() {
     const { props } = usePage<Props>();
+
+    const production = props.data.map((i) => ({
+        hour: i.hour,
+        production: i.production,
+    }));
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -51,7 +56,7 @@ export default function Dashboard() {
 
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2">
-                        <ChartLineMultiple data={props.data} />
+                        <ChartBarDefault data={production} />
                     </div>
 
                     <div className="col-span-1 flex flex-col gap-4">
@@ -75,6 +80,7 @@ export default function Dashboard() {
                         <Card className="h-full">
                             <CardHeader>
                                 <CardTitle className="capitalize">Power distribution</CardTitle>
+                                <CardDescription>Now</CardDescription>
                             </CardHeader>
 
                             <CardContent className="h-full">

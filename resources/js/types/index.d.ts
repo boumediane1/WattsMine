@@ -43,7 +43,7 @@ export interface User {
 }
 
 export interface History {
-    date: string;
+    hour: string;
     production: number;
     consumption: number;
 }
