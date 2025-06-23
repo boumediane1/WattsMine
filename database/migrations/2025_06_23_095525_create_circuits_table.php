@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,12 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('measurements', function (Blueprint $table) {
+        Schema::create('circuits', function (Blueprint $table) {
             $table->id();
-            $table->integer('utility_grid_active_power');
-            $table->jsonb('solar_arrays');
-            $table->jsonb('consumption');
-            $table->timestamp('measured_at');
+            $table->string('title');
+            $table->enum('type', ['grid_utility', 'production', 'consumption']);
+            $table->boolean('on');
+            $table->foreignIdFor(User::class)->constrained();
+            $table->timestamps();
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('measurements');
+        Schema::dropIfExists('circuits');
     }
 };
