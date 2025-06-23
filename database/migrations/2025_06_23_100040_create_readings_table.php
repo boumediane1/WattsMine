@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('readings', function (Blueprint $table) {
             $table->id();
             $table->integer('active_power');
-            $table->foreignIdFor(Circuit::class)->constrained();
-            $table->timestamps();
+            $table->foreignIdFor(Circuit::class);
+            $table->timestamp('measured_at');
         });
     }
 

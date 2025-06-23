@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            CircuitSeeder::class,
+            ReadingSeeder::class
         ]);
     }
 }

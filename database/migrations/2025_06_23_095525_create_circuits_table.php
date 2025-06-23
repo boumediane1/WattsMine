@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('circuits', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->enum('type', ['grid_utility', 'production', 'consumption']);
+            $table->enum('type', ['GridUtility', 'Production', 'Consumption']);
             $table->boolean('on');
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
