@@ -19,35 +19,35 @@ class MeasurementFactory extends Factory
         $solar_arrays = [
             [
                 'title' => "Solar Array 1",
-                'active_power' => fake()->numberBetween(0, 1000)
+                'active_power' => 1000
             ],
             [
                 'title' => "Solar Array 2",
-                'active_power' => fake()->numberBetween(0, 900)
+                'active_power' => 900
             ],
             [
                 'title' => "Solar Array 3",
-                'active_power' => fake()->numberBetween(0, 80)
+                'active_power' => 300
             ],
             [
                 'title' => "Solar Array 4",
-                'active_power' => fake()->numberBetween(0, 30)
+                'active_power' => 151
             ],
         ];
 
         $load = [
             [
                 'title' => 'Pool & Cave Total',
-                'active_power' => 1612
+                'active_power' => 3100
             ],
             [
                 'title' => 'Rack UPS',
-                'active_power' => 674
+                'active_power' => 2609
             ]
         ];
 
         return [
-            'utility_grid_active_power' => 2221,
+            'utility_grid_active_power' => 24,
             'solar_arrays' => $solar_arrays,
             'consumption' => $load,
             'measured_at' => now()

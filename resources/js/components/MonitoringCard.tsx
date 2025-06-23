@@ -2,17 +2,18 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import React from 'react';
 
-export interface MonitoringCardProps {
-    title: string;
+export interface Circuit {
+    name: string;
     power: number;
-    status: string;
+    on: boolean;
     type: 'production' | 'consumption';
     icon?: React.ReactNode;
     color?: string;
 }
 
-const MonitoringCard = ({ title, power, status, icon, color, type }: MonitoringCardProps) => {
-    const percentage = Math.min((power / 1000) * 100, 100); // arbitrary max scale
+const MonitoringCard = ({ name, power, icon, color, type }: Circuit) => {
+    const percentage = Math.min((power / 1000) * 100, 100);
+    const status = type === 'production' ? 'Producing' : 'Consuming';
 
     return (
         <Card>
@@ -22,7 +23,7 @@ const MonitoringCard = ({ title, power, status, icon, color, type }: MonitoringC
                         <span className={`grid size-12 place-items-center rounded-lg text-white ${color ?? 'bg-blue-600'}`}>{icon}</span>
 
                         <div>
-                            <h3 className="text-xl font-bold">{title}</h3>
+                            <h3 className="text-xl font-bold">{name}</h3>
                             <p className="text-sm text-gray-700">{status}</p>
                         </div>
                     </div>

@@ -68,12 +68,12 @@ export default function Dashboard() {
                             <CardContent className="space-y-4">
                                 <div className="flex items-center justify-between gap-x-4">
                                     <div className="text-3xl font-bold" style={{ fontFamily: 'Inter, sand-serif' }}>
-                                        22%
+                                        100%
                                     </div>
-                                    <div className="text-sm text-gray-500">75 minutes left estimated</div>
+                                    <div className="text-sm text-gray-500">11 hours left estimated</div>
                                 </div>
 
-                                <Progress value={22} className="h-4 rounded" />
+                                <Progress value={100} className="h-4 rounded" />
                             </CardContent>
                         </Card>
 

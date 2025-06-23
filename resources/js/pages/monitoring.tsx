@@ -1,4 +1,4 @@
-import MonitoringCard, { MonitoringCardProps } from '@/components/MonitoringCard';
+import MonitoringCard, { Circuit } from '@/components/MonitoringCard';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -11,75 +11,75 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const data: MonitoringCardProps[] = [
+export const data: Circuit[] = [
     {
-        title: 'Solar Array 1',
+        name: 'Solar Array 1',
         power: 922,
-        status: 'Producing',
+        on: true,
         type: 'production',
         icon: <SunMedium className="size-6" />,
         color: 'bg-green-600',
     },
     {
-        title: 'Solar Array 2',
+        name: 'Solar Array 2',
         power: 878,
-        status: 'Producing',
+        on: true,
         type: 'production',
         icon: <SunMedium className="size-6" />,
         color: 'bg-green-600',
     },
     {
-        title: 'Solar Array 3',
+        name: 'Solar Array 3',
         power: 76,
-        status: 'Producing',
+        on: true,
         type: 'production',
         icon: <SunMedium className="size-6" />,
         color: 'bg-green-600',
     },
     {
-        title: 'Solar Array 4',
+        name: 'Solar Array 4',
         power: 25,
-        status: 'Producing',
+        on: true,
         type: 'production',
         icon: <SunMedium className="size-6" />,
         color: 'bg-green-600',
     },
     {
-        title: 'Refrigerator',
+        name: 'Refrigerator',
         power: 120,
-        status: 'Consuming',
+        on: false,
         type: 'consumption',
         icon: <Refrigerator className="size-6" />,
         color: 'bg-blue-500',
     },
     {
-        title: 'Living Room TV',
+        name: 'Living Room TV',
         power: 85,
-        status: 'Consuming',
+        on: false,
         type: 'consumption',
         icon: <Tv className="size-6" />,
         color: 'bg-purple-500',
     },
     {
-        title: 'Washing Machine',
+        name: 'Washing Machine',
         power: 691,
-        status: 'Consuming',
+        on: false,
         type: 'consumption',
         icon: <WashingMachine className="size-6" />,
         color: 'bg-orange-500',
     },
     {
-        title: 'Microwave Oven',
+        name: 'Microwave Oven',
         power: 1100,
-        status: 'Consuming',
+        on: true,
         type: 'consumption',
         icon: <Microwave className="size-6" />,
         color: 'bg-red-500',
     },
     {
-        title: 'Wi-Fi & Devices',
+        name: 'Wi-Fi & Devices',
         power: 137,
-        status: 'Consuming',
+        on: true,
         type: 'consumption',
         icon: <Wifi className="size-6" />,
         color: 'bg-sky-500',
