@@ -2,8 +2,9 @@
 
 namespace App\Enums;
 
-enum CircuitType {
-    case GridUtility;
-    case Production;
-    case Consumption;
+enum CircuitType: string
+{
+    case GridUtility = 'grid_utility';
+    case Production = 'production';
+    case Consumption = 'consumption';
 }

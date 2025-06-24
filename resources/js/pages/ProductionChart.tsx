@@ -5,7 +5,6 @@ import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { History } from '@/types';
 
 export const description = 'A bar chart';
 
@@ -25,7 +24,9 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-export function ChartBarDefault({ data }: { data: Pick<History, 'hour' | 'production'>[] }) {
+export function ChartBarDefault({ data }: { data: { hour: number; active_power: number }[] }) {
+    console.log(data);
+
     return (
         <Card className="pt-0">
             <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
@@ -56,19 +57,18 @@ export function ChartBarDefault({ data }: { data: Pick<History, 'hour' | 'produc
                 <ChartContainer config={chartConfig}>
                     <BarChart accessibilityLayer data={data}>
                         <CartesianGrid vertical={false} />
-                        <YAxis dataKey="production" />
+                        <YAxis dataKey="active_power" />
                         <XAxis
                             dataKey="hour"
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
                             tickFormatter={(value) => {
-                                const hours = new Date(value).getHours();
-                                return `${hours.toString().padStart(2, '0')}h`;
+                                return `${value.toString().padStart(2, '0')}h`;
                             }}
                         />
                         <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-                        <Bar dataKey="production" fill="var(--color-desktop)" radius={8} />
+                        <Bar dataKey="active_power" fill="var(--color-desktop)" radius={8} />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
