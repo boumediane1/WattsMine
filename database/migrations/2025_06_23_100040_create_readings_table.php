@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('active_power');
             $table->foreignIdFor(Circuit::class);
             $table->timestamp('measured_at');
+            $table->index('circuit_id');
         });
     }
 

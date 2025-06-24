@@ -1,31 +1,20 @@
-'use client';
-
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-
-export const description = 'A bar chart';
-
-const chartData = [
-    { month: 'January', desktop: 186 },
-    { month: 'February', desktop: 305 },
-    { month: 'March', desktop: 237 },
-    { month: 'April', desktop: 73 },
-    { month: 'May', desktop: 209 },
-    { month: 'June', desktop: 214 },
-];
+import { useState } from 'react';
+import { Props } from './dashboard';
 
 const chartConfig = {
-    desktop: {
-        label: 'Desktop',
+    active_power: {
+        label: 'Active power',
         color: 'var(--chart-5)',
     },
 } satisfies ChartConfig;
 
-export function ChartBarDefault({ data }: { data: { hour: number; active_power: number }[] }) {
-    console.log(data);
+export function ChartBarDefault({ data }: Props) {
+    const [type, setType] = useState<'production' | 'consumption'>('production');
 
     return (
         <Card className="pt-0">
@@ -35,7 +24,7 @@ export function ChartBarDefault({ data }: { data: { hour: number; active_power: 
                     <CardDescription>Last 24 hours</CardDescription>
                 </div>
 
-                <Select value={'production'} onValueChange={() => {}}>
+                <Select defaultValue={'production'} onValueChange={(value: 'production' | 'consumption') => setType(value)}>
                     <SelectTrigger className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex" aria-label="Select a value">
                         <SelectValue placeholder="Last 3 months" />
                     </SelectTrigger>
@@ -55,7 +44,7 @@ export function ChartBarDefault({ data }: { data: { hour: number; active_power: 
 
             <CardContent>
                 <ChartContainer config={chartConfig}>
-                    <BarChart accessibilityLayer data={data}>
+                    <BarChart accessibilityLayer data={data[type]}>
                         <CartesianGrid vertical={false} />
                         <YAxis dataKey="active_power" />
                         <XAxis
@@ -67,8 +56,8 @@ export function ChartBarDefault({ data }: { data: { hour: number; active_power: 
                                 return `${value.toString().padStart(2, '0')}h`;
                             }}
                         />
-                        <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-                        <Bar dataKey="active_power" fill="var(--color-desktop)" radius={8} />
+                        <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel className="w-36" />} />
+                        <Bar dataKey="active_power" fill="var(--color-active_power)" radius={8} />
                     </BarChart>
                 </ChartContainer>
             </CardContent>

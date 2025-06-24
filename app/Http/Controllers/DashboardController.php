@@ -23,7 +23,7 @@ class DashboardController extends Controller
                 ->groupBy(fn($item) => Carbon::parse($item->measured_at)->hour)
                 ->map(fn($item, $key) => [
                     'hour' => $key,
-                    'active_power' => $item->average('active_power')
+                    'active_power' => round($item->average('active_power'))
                 ])
                 ->values()
             );

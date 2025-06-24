@@ -60,7 +60,7 @@ export default function Dashboard() {
 
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2">
-                        <ChartBarDefault data={props.data.production} />
+                        <ChartBarDefault data={props.data} />
                     </div>
 
                     <div className="col-span-1 flex flex-col gap-4">
