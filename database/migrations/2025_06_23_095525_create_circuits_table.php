@@ -18,7 +18,6 @@ return new class extends Migration
             $table->enum('type', ['grid_utility', 'production', 'consumption']);
             $table->boolean('on')->default(true);
             $table->foreignIdFor(User::class)->constrained();
-            $table->timestamps();
         });
     }
 

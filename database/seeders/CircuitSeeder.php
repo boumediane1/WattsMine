@@ -29,7 +29,6 @@ class CircuitSeeder extends Seeder
                 'type' => CircuitType::Consumption->value,
                 'user_id' => 1,
             ],
-
             [
                 'title' => 'Living Room TV',
                 'type' => CircuitType::Consumption->value,
@@ -50,6 +49,11 @@ class CircuitSeeder extends Seeder
                 'type' => CircuitType::Consumption->value,
                 'user_id' => 1,
             ],
+            [
+                'title' => 'Grid Utility',
+                'type' => CircuitType::GridUtility->value,
+                'user_id' => 1,
+            ]
         ];
 
         $circuits = array_merge($production_circuits, $consumption_circuits);

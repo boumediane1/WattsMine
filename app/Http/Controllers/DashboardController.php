@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Circuit;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -28,6 +30,15 @@ class DashboardController extends Controller
                 ->values()
             );
 
-        return Inertia::render('dashboard', ['data' => $readings]);
+
+        $realtime = Circuit::query()->with([
+            'readings' => function ($readings) {
+                $readings->latest('id')->take(1);
+            }])
+            ->get()
+            ->groupBy('type')
+            ->map(fn($item, $key) => $item->sum('readings.0.active_power'));
+
+        return Inertia::render('dashboard', ['data' => $readings, ...$realtime]);
     }
 }

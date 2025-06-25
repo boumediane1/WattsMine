@@ -7,7 +7,7 @@ const nodes: Node<{ title: string; value: string; image: string }>[] = [
         position: { x: 125, y: 0 },
         data: {
             title: 'Solar Production',
-            value: '2351',
+            value: '2000',
             image: '/images/solar-panel.png',
         },
         type: 'custom',
@@ -15,19 +15,19 @@ const nodes: Node<{ title: string; value: string; image: string }>[] = [
     {
         id: 'grid',
         position: { x: 0, y: 100 },
-        data: { title: 'Grid', value: '24', image: '/images/electricity.png' },
+        data: { title: 'Grid', value: '?', image: '/images/electricity.png' },
         type: 'custom',
     },
     {
         id: 'battery',
         position: { x: 250, y: 100 },
-        data: { title: 'Battery', value: '3700', image: '/images/full-battery.png' },
+        data: { title: 'Battery', value: '0', image: '/images/full-battery.png' },
         type: 'custom',
     },
     {
         id: 'home',
         position: { x: 125, y: 200 },
-        data: { title: 'Home', value: '5709', image: '/images/business.png' },
+        data: { title: 'Home', value: '5000', image: '/images/business.png' },
         type: 'custom',
     },
 ];

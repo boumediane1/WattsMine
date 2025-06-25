@@ -26,7 +26,7 @@ test('calculates real time total consumption', function () {
 test('retrieves real time utility grid active power', function () {
 });
 
-test('test dashboard shows correct power production by hour', function () {
+test('test dashboard shows correct power production and consumption by hour', function () {
     $this->actingAs(User::factory()->create());
     $this->withoutExceptionHandling();
 
@@ -77,5 +77,54 @@ test('test dashboard shows correct power production by hour', function () {
                 ]
             ]
         ])
+    );
+});
+
+test('test dashboard shows total power for production and consumption in real time', function () {
+    $this->actingAs(User::factory()->create());
+    seed(CircuitSeeder::class);
+    $this->withoutExceptionHandling();
+
+    Reading::query()->create([
+        'active_power' => 100,
+        'circuit_id' => Circuit::findCircuitByTitle('Solar Array 1')->id,
+        'measured_at' => '2025-01-01 00:00:00'
+    ]);
+
+    Reading::query()->create([
+        'active_power' => 200,
+        'circuit_id' => Circuit::findCircuitByTitle('Solar Array 2')->id,
+        'measured_at' => '2025-01-01 00:00:00'
+    ]);
+
+    Reading::query()->create([
+        'active_power' => 300,
+        'circuit_id' => Circuit::findCircuitByTitle('Solar Array 1')->id,
+        'measured_at' => '2025-01-01 01:00:00'
+    ]);
+
+
+    Reading::query()->create([
+        'active_power' => 400,
+        'circuit_id' => Circuit::findCircuitByTitle('Solar Array 2')->id,
+        'measured_at' => '2025-01-01 01:00:00'
+    ]);
+
+    Reading::query()->create([
+        'active_power' => 500,
+        'circuit_id' => Circuit::findCircuitByTitle('Washing Machine')->id,
+        'measured_at' => '2025-01-01 00:00:00'
+    ]);
+
+    Reading::query()->create([
+        'active_power' => 600,
+        'circuit_id' => Circuit::findCircuitByTitle('Washing Machine')->id,
+        'measured_at' => '2025-01-01 00:00:00'
+    ]);
+
+    $this->get('/dashboard')->assertInertia(fn(AssertableInertia $page) => $page
+        ->component('dashboard')
+        ->where('production', 700)
+        ->where('consumption', 600)
     );
 });
