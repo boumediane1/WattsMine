@@ -173,3 +173,49 @@ test('test utility grid\'s active power is correctly computed', function () {
         ],
     ]);
 });
+
+test('test reading latest circuits\' readings', function () {
+    $this->actingAs(User::factory()->create());
+
+    seed(CircuitSeeder::class);
+
+    Reading::query()->insert([
+        [
+            'circuit_id' => 1,
+            'active_power' => 100,
+            'measured_at' => '2025-01-01 00:00:00'
+        ],
+        [
+            'circuit_id' => 1,
+            'active_power' => 200,
+            'measured_at' => '2025-01-01 00:01:00'
+        ],
+        [
+            'circuit_id' => 5,
+            'active_power' => 300,
+            'measured_at' => '2025-01-01 00:00:00'
+        ],
+        [
+            'circuit_id' => 5,
+            'active_power' => 400,
+            'measured_at' => '2025-01-01 00:01:00'
+        ],
+    ]);
+
+    expect(Reading::latest())->toMatchArray([
+        [
+            'id' => 1,
+            'title' => 'Solar Array 1',
+            'type' => 'production',
+            'active_power' => 200,
+            'measured_at' => '2025-01-01 00:01:00'
+        ],
+        [
+            'id' => 5,
+            'title' => 'Refrigerator',
+            'type' => 'consumption',
+            'active_power' => 400,
+            'measured_at' => '2025-01-01 00:01:00'
+        ],
+    ]);
+});
