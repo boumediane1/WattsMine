@@ -6,6 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
+import { useEcho } from '@laravel/echo-react';
 import 'reactflow/dist/style.css';
 import { ChartBarDefault } from './ProductionChart';
 import SolarPVSystem from './SolarPVSystem';
@@ -33,7 +34,9 @@ export type Props = {
 export default function Dashboard() {
     const { props } = usePage<Props>();
 
-    console.log(props.data);
+    useEcho('power', 'ReadingsSimulated', (e) => {
+        console.log(e);
+    }).listen();
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>

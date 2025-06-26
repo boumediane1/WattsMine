@@ -19,7 +19,7 @@ class ReadingSeeder extends Seeder
         $readings = [];
 
         for ($i = 0; $i < 86_400; $i += 60) {
-            $measured_at = $yesterday->copy()->addSeconds(60);
+            $measured_at = $yesterday->copy()->addSeconds($i);
             $readings = array_merge($readings, $this->simulation->readings(
                 $this->simulation->fakeData(),
                 $measured_at

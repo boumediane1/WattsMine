@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Reading;
-use App\Services\SimulationService;
+use App\Events\ReadingsSimulated;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
@@ -12,6 +11,5 @@ Artisan::command('inspire', function () {
 
 
 Schedule::call(function () {
-    $simulation = app(SimulationService::class);
-    Reading::query()->insert($this->simulation->readings($simulation->fakeData(), now()));
+    ReadingsSimulated::dispatch();
 })->everySecond();
