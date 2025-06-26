@@ -3,6 +3,7 @@
 use App\Models\Circuit;
 use App\Models\Reading;
 use App\Models\User;
+use App\Services\SimulationService;
 use Database\Seeders\CircuitSeeder;
 use Inertia\Testing\AssertableInertia;
 use function Pest\Laravel\seed;
@@ -127,4 +128,48 @@ test('test dashboard shows total power for production and consumption in real ti
         ->where('production', 700)
         ->where('consumption', 600)
     );
+});
+
+test('test utility grid\'s active power is correctly computed', function () {
+    $this->actingAs(User::factory()->create());
+
+    $simulation = app(SimulationService::class);
+
+    seed(CircuitSeeder::class);
+
+    $now = now();
+    $readings = $simulation->readings([
+        'Solar Array 1' => 100,
+        'Solar Array 2' => 200,
+        'Living Room TV' => 300,
+        'Washing Machine' => 400,
+    ], $now);
+
+    expect($readings)->toMatchArray([
+        [
+            'active_power' => 100,
+            'circuit_id' => 1,
+            'measured_at' => $now
+        ],
+        [
+            'active_power' => 200,
+            'circuit_id' => 2,
+            'measured_at' => $now
+        ],
+        [
+            'active_power' => 300,
+            'circuit_id' => 6,
+            'measured_at' => $now
+        ],
+        [
+            'active_power' => 400,
+            'circuit_id' => 7,
+            'measured_at' => $now
+        ],
+        [
+            'active_power' => 400,
+            'circuit_id' => 10,
+            'measured_at' => $now
+        ],
+    ]);
 });
