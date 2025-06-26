@@ -13,5 +13,5 @@ Artisan::command('inspire', function () {
 
 Schedule::call(function () {
     $simulation = app(SimulationService::class);
-    Reading::query()->insert($simulation->readings(now()));
+    Reading::query()->insert($this->simulation->readings($simulation->fakeData(), now()));
 })->everySecond();

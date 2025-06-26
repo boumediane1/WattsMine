@@ -41,4 +41,19 @@ class SimulationService
 
         return $readings;
     }
+
+    public function fakeData(): array
+    {
+        return [
+            'Solar Array 1' => fake()->numberBetween(900, 1000),
+            'Solar Array 2' => fake()->numberBetween(900, 1000),
+            'Solar Array 3' => fake()->numberBetween(20, 80),
+            'Solar Array 4' => fake()->numberBetween(20, 80),
+            'Refrigerator' => fake()->numberBetween(100, 200),
+            'Wi-Fi & Devices' => fake()->numberBetween(100, 200),
+            'Living Room TV' => fake()->numberBetween(80, 90),
+            'Washing Machine' => fake()->numberBetween(600, 700),
+            'Microwave Oven' => fake()->numberBetween(1100, 1200)
+        ];
+    }
 }

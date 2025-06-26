@@ -21,17 +21,7 @@ class ReadingSeeder extends Seeder
         for ($i = 0; $i < 86_400; $i += 60) {
             $measured_at = $yesterday->copy()->addSeconds(60);
             $readings = array_merge($readings, $this->simulation->readings(
-                [
-                    'Solar Array 1' => fake()->numberBetween(900, 1000),
-                    'Solar Array 2' => fake()->numberBetween(900, 1000),
-                    'Solar Array 3' => fake()->numberBetween(20, 80),
-                    'Solar Array 4' => fake()->numberBetween(20, 80),
-                    'Refrigerator' => fake()->numberBetween(100, 200),
-                    'Wi-Fi & Devices' => fake()->numberBetween(100, 200),
-                    'Living Room TV' => fake()->numberBetween(80, 90),
-                    'Washing Machine' => fake()->numberBetween(600, 700),
-                    'Microwave Oven' => fake()->numberBetween(1100, 1200)
-                ],
+                $this->simulation->fakeData(),
                 $measured_at
             ));
         }
