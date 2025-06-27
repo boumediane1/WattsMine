@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CircuitController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,9 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('monitoring');
     });
 
-    Route::get('breakers', function () {
-        return Inertia::render('breakers');
-    });
+    Route::get('breakers', [CircuitController::class, 'index']);
 });
 
 require __DIR__.'/settings.php';

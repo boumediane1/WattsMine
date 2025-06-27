@@ -16,7 +16,8 @@ class Circuit extends Model
     protected function casts(): array
     {
         return [
-            'type' => CircuitType::class
+            'type' => CircuitType::class,
+            'on' => 'boolean'
         ];
     }
 
