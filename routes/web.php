@@ -16,7 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('monitoring');
     });
 
-    Route::get('breakers', [CircuitController::class, 'index']);
+    Route::get('breakers', [CircuitController::class, 'index'])->name('breakers.index');
 
     Route::patch('breakers/{circuit}', [CircuitController::class, 'update']);
 });

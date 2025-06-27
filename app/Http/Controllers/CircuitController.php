@@ -24,8 +24,6 @@ class CircuitController extends Controller
             'on' => $request->input('on')
         ]);
 
-        return Inertia::render('breakers', [
-            ['success' => $success]
-        ]);
+        return to_route('breakers.index');
     }
 }

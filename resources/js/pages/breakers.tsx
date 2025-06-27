@@ -1,5 +1,5 @@
 import AppLayout from '@/layouts/app-layout';
-import { DataTableDemo } from '@/pages/Datatable';
+import { DataTable } from '@/pages/Datatable';
 import type { BreadcrumbItem, Reading } from '@/types';
 import { Head } from '@inertiajs/react';
 import { useEcho } from '@laravel/echo-react';
@@ -24,7 +24,7 @@ const Breakers = () => {
             <Head title="Brakers" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
                 <h2 className="text-xl font-semibold tracking-tight">Brakers</h2>
-                <DataTableDemo readings={readings} />
+                <DataTable readings={readings} />
             </div>
         </AppLayout>
     );
