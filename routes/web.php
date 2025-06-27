@@ -17,6 +17,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::get('breakers', [CircuitController::class, 'index']);
+
+    Route::patch('breakers/{circuit}', [CircuitController::class, 'update']);
 });
 
 require __DIR__.'/settings.php';

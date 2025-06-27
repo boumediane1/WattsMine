@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Circuit extends Model
 {
+    protected $guarded = [];
+
+    public $timestamps = false;
+
     public static function findCircuitByTitle(string $title)
     {
         return Circuit::query()->where('title', $title)->first();
