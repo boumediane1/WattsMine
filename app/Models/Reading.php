@@ -24,6 +24,8 @@ class Reading extends Model
                     ->latest('id')
                     ->take(1);
             })
+            ->orderBy('type', 'desc')
+            ->orderBy('title')
             ->get()
             ->filter(fn($item) => count($item->readings) > 0)
             ->values()

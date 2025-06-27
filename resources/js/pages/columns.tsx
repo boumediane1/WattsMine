@@ -56,7 +56,7 @@ export const columns = (setData: InertiaFormProps<{ id: number; on: boolean }>['
                 <div className="flex justify-center">
                     {row.original.on ? (
                         <>
-                            <Button className="rounded-none rounded-l bg-green-500 uppercase">on</Button>
+                            <Button className="rounded-none rounded-l bg-green-500 uppercase hover:bg-green-500">on</Button>
 
                             <Button
                                 onClick={() => setData({ id: row.original.id, on: false })}
@@ -75,7 +75,7 @@ export const columns = (setData: InertiaFormProps<{ id: number; on: boolean }>['
                             >
                                 on
                             </Button>
-                            <Button className="rounded-none rounded-r bg-red-500 uppercase">off</Button>
+                            <Button className="rounded-none rounded-r bg-red-500 uppercase hover:bg-red-500">off</Button>
                         </>
                     )}
                 </div>
