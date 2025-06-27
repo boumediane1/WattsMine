@@ -14,7 +14,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const icons: Record<string, { component: JSX.Element; color: string }> = {
+export const icons: Record<string, { component: JSX.Element; color: string }> = {
     'Solar Array 1': {
         component: <SunMedium className="size-6" />,
         color: 'bg-green-600',

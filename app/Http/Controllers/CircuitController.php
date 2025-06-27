@@ -10,7 +10,7 @@ class CircuitController extends Controller
 {
     public function index()
     {
-        $circuits = Circuit::query()->whereNot('type', CircuitType::GridUtility)->get();
+        $circuits = Circuit::query()->whereNot('type', CircuitType::UtilityGrid)->get();
 
         return Inertia::render('breakers', [
             'circuits' => $circuits

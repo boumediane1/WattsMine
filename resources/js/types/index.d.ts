@@ -48,4 +48,5 @@ export interface Reading {
     type: 'production' | 'consumption' | 'utility_grid';
     active_power: number;
     measured_at: string;
+    on: boolean;
 }

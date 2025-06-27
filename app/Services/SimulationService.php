@@ -35,7 +35,7 @@ class SimulationService
 
         $readings[] = [
             'active_power' => $active_power_utility_grid,
-            'circuit_id' => Circuit::findCircuitByTitle('Grid Utility')->id,
+            'circuit_id' => Circuit::findCircuitByTitle('Utility Grid')->id,
             'measured_at' => $measured_at
         ];
 

@@ -10,38 +10,38 @@ import {
     useReactTable,
     VisibilityState,
 } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, Plug, Sun } from 'lucide-react';
 import * as React from 'react';
 
-import { Circuit } from '@/components/MonitoringCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { data } from '@/pages/monitoring';
+import { icons } from '@/pages/monitoring';
+import { Reading } from '@/types';
 
-export const columns: ColumnDef<Circuit>[] = [
+export const columns: ColumnDef<Reading>[] = [
     {
-        accessorKey: 'name',
+        accessorKey: 'title',
         header: ({ column }) => {
             return (
                 <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                    Name
+                    Title
                     <ArrowUpDown />
                 </Button>
             );
         },
         cell: ({ row }) => (
             <div className="flex items-center">
-                <span className={`grid size-8 place-items-center rounded-lg text-white ${row.original.color ?? 'bg-blue-600'}`}>
-                    {row.original.icon}
+                <span className={`grid size-8 place-items-center rounded-lg text-white ${icons[row.original.title].color ?? 'bg-blue-600'}`}>
+                    {icons[row.original.title].component}
                 </span>
 
-                <div className="px-3 font-medium">{row.getValue('name')}</div>
+                <div className="px-3 font-medium">{row.getValue('title')}</div>
             </div>
         ),
     },
     {
-        accessorKey: 'power',
+        accessorKey: 'active_power',
         header: ({ column }) => {
             return (
                 <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
@@ -50,13 +50,17 @@ export const columns: ColumnDef<Circuit>[] = [
                 </Button>
             );
         },
-        cell: ({ row }) => <div className="px-3 font-medium">{row.getValue('power')} W</div>,
+        cell: ({ row }) => <div className="px-3 font-medium">{row.original.active_power} W</div>,
     },
     {
         accessorKey: 'type',
         header: 'Type',
-        cell: ({ row }) =>
-            row.original.type === 'production' ? <Badge color="green" text={row.original.type} /> : <Badge color="blue" text={row.original.type} />,
+        cell: ({ row }) => (
+            <div className="flex items-center gap-x-2">
+                {row.original.type === 'production' ? <Sun className="size-4" /> : <Plug className="size-4" />}
+                <span className="font-medium">{row.original.type === 'production' ? 'Production' : 'Consumption'}</span>
+            </div>
+        ),
     },
     {
         id: 'actions',
@@ -85,14 +89,14 @@ export const columns: ColumnDef<Circuit>[] = [
     },
 ];
 
-export function DataTableDemo() {
+export function DataTableDemo({ readings }: { readings: Reading[] }) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = React.useState({});
 
     const table = useReactTable({
-        data,
+        data: readings,
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -114,9 +118,9 @@ export function DataTableDemo() {
         <div className="w-full">
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter names..."
-                    value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
-                    onChange={(event) => table.getColumn('email')?.setFilterValue(event.target.value)}
+                    placeholder="Filter titles..."
+                    value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
+                    onChange={(event) => table.getColumn('title')?.setFilterValue(event.target.value)}
                     className="max-w-sm"
                 />
             </div>
@@ -167,19 +171,3 @@ export function DataTableDemo() {
         </div>
     );
 }
-
-const Badge = ({ color, text }: { color: string; text: string }) => {
-    if (color === 'green') {
-        return (
-            <span className="ring-inset/10 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 capitalize ring-1 ring-green-600/20 ring-inset">
-                {text}
-            </span>
-        );
-    } else if (color === 'blue') {
-        return (
-            <span className="ring-inset/20 inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 capitalize ring-1 ring-blue-700/10 ring-inset">
-                {text}
-            </span>
-        );
-    }
-};

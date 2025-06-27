@@ -34,6 +34,7 @@ class Reading extends Model
                     'type' => $item->type->value,
                     'active_power' => $item->readings[0]->active_power,
                     'measured_at' => $item->readings[0]->measured_at,
+                    'on' => $item->on
                 ];
             });
     }

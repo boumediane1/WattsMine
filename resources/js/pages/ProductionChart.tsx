@@ -32,7 +32,7 @@ export function ChartBarDefault({ data }: Props) {
                         <SelectItem value="production" className="rounded-lg">
                             Production
                         </SelectItem>
-                        <SelectItem value="grid_utility" className="rounded-lg">
+                        <SelectItem value="utility_grid" className="rounded-lg">
                             Grid utility
                         </SelectItem>
                         <SelectItem value="consumption" className="rounded-lg">

@@ -50,8 +50,8 @@ class CircuitSeeder extends Seeder
                 'user_id' => 1,
             ],
             [
-                'title' => 'Grid Utility',
-                'type' => CircuitType::GridUtility->value,
+                'title' => 'Utility Grid',
+                'type' => CircuitType::UtilityGrid->value,
                 'user_id' => 1,
             ]
         ];

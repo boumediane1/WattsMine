@@ -208,14 +208,16 @@ test('test reading latest circuits\' readings', function () {
             'title' => 'Solar Array 1',
             'type' => 'production',
             'active_power' => 200,
-            'measured_at' => '2025-01-01 00:01:00'
+            'measured_at' => '2025-01-01 00:01:00',
+            'on' => true
         ],
         [
             'id' => 5,
             'title' => 'Refrigerator',
             'type' => 'consumption',
             'active_power' => 400,
-            'measured_at' => '2025-01-01 00:01:00'
+            'measured_at' => '2025-01-01 00:01:00',
+            'on' => true
         ],
     ]);
 });
