@@ -42,8 +42,10 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
-export interface History {
-    hour: string;
-    production: number;
-    consumption: number;
+export interface Reading {
+    id: number;
+    title: string;
+    type: 'production' | 'consumption' | 'utility_grid';
+    active_power: number;
+    measured_at: string;
 }

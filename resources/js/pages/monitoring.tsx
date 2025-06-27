@@ -1,9 +1,12 @@
-import MonitoringCard, { Circuit } from '@/components/MonitoringCard';
+import MonitoringCard, { CardProps } from '@/components/MonitoringCard';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { type BreadcrumbItem, Reading } from '@/types';
 import { Head } from '@inertiajs/react';
-import { Microwave, Refrigerator, SunMedium, Tv, WashingMachine, Wifi } from 'lucide-react';
+import { useEcho } from '@laravel/echo-react';
+import { SunMedium } from 'lucide-react';
+import { JSX, useState } from 'react';
 import 'reactflow/dist/style.css';
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Monitoring',
@@ -11,84 +14,69 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export const data: Circuit[] = [
-    {
-        name: 'Solar Array 1',
-        power: 922,
-        on: true,
-        type: 'production',
-        icon: <SunMedium className="size-6" />,
+const icons: Record<string, { component: JSX.Element; color: string }> = {
+    'Solar Array 1': {
+        component: <SunMedium className="size-6" />,
         color: 'bg-green-600',
     },
-    {
-        name: 'Solar Array 2',
-        power: 878,
-        on: true,
-        type: 'production',
-        icon: <SunMedium className="size-6" />,
+    'Solar Array 2': {
+        component: <SunMedium className="size-6" />,
         color: 'bg-green-600',
     },
-    {
-        name: 'Solar Array 3',
-        power: 76,
-        on: true,
-        type: 'production',
-        icon: <SunMedium className="size-6" />,
+    'Solar Array 3': {
+        component: <SunMedium className="size-6" />,
         color: 'bg-green-600',
     },
-    {
-        name: 'Solar Array 4',
-        power: 25,
-        on: true,
-        type: 'production',
-        icon: <SunMedium className="size-6" />,
+    'Solar Array 4': {
+        component: <SunMedium className="size-6" />,
         color: 'bg-green-600',
     },
-    {
-        name: 'Refrigerator',
-        power: 120,
-        on: false,
-        type: 'consumption',
-        icon: <Refrigerator className="size-6" />,
+    Refrigerator: {
+        component: <SunMedium className="size-6" />,
         color: 'bg-blue-500',
     },
-    {
-        name: 'Living Room TV',
-        power: 85,
-        on: false,
-        type: 'consumption',
-        icon: <Tv className="size-6" />,
+    'Living Room TV': {
+        component: <SunMedium className="size-6" />,
         color: 'bg-purple-500',
     },
-    {
-        name: 'Washing Machine',
-        power: 691,
-        on: false,
-        type: 'consumption',
-        icon: <WashingMachine className="size-6" />,
+    'Washing Machine': {
+        component: <SunMedium className="size-6" />,
         color: 'bg-orange-500',
     },
-    {
-        name: 'Microwave Oven',
-        power: 1100,
-        on: true,
-        type: 'consumption',
-        icon: <Microwave className="size-6" />,
+    'Microwave Oven': {
+        component: <SunMedium className="size-6" />,
         color: 'bg-red-500',
     },
-    {
-        name: 'Wi-Fi & Devices',
-        power: 137,
-        on: true,
-        type: 'consumption',
-        icon: <Wifi className="size-6" />,
+    'Wi-Fi & Devices': {
+        component: <SunMedium className="size-6" />,
         color: 'bg-sky-500',
     },
-];
+};
+
+const fromReadings = (readings: Reading[]) => {
+    return readings.map((i, _, data) => {
+        const sum = data.map((i) => i.active_power).reduce((accumulator, current) => accumulator + current);
+        const progress = (i.active_power * 100) / sum;
+
+        return {
+            title: i.title,
+            active_power: i.active_power,
+            type: i.type,
+            progress,
+            icon: icons[i.title],
+        };
+    });
+};
 
 export default function Monitoring() {
-    const productionCircuits = data.filter((i) => i.type === 'production');
-    const consumptionCircuits = data.filter((i) => i.type === 'consumption');
+    const [readings, setReadings] = useState<Reading[]>([]);
+
+    useEcho('power', 'ReadingsSimulated', (e: { readings: Reading[] }) => {
+        setReadings(e.readings);
+    });
+
+    const productionCircuits: CardProps[] = fromReadings(readings.filter((i) => i.type === 'production'));
+    const consumptionCircuits: CardProps[] = fromReadings(readings.filter((i) => i.type === 'consumption'));
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
