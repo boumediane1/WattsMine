@@ -18,14 +18,16 @@ class SimulationService
         $active_power_utility_grid = 0;
 
         foreach ($circuits as $circuit) {
+            $active_power = $circuit->on ? $data[$circuit->title] : 0;
+
             if ($circuit->type === CircuitType::Consumption) {
-                $active_power_utility_grid += $data[$circuit->title];
+                $active_power_utility_grid += $active_power;
             } else if ($circuit->type === CircuitType::Production) {
-                $active_power_utility_grid -= $data[$circuit->title];
+                $active_power_utility_grid -= $active_power;
             }
 
             $reading = [
-                'active_power' => $data[$circuit->title],
+                'active_power' => $active_power,
                 'circuit_id' => $circuit->id,
                 'measured_at' => $measured_at
             ];
