@@ -4,9 +4,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { type BreadcrumbItem, Reading } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import { useEcho } from '@laravel/echo-react';
+import { useState } from 'react';
 import 'reactflow/dist/style.css';
 import { ChartBarDefault } from './ProductionChart';
 import SolarPVSystem from './SolarPVSystem';
@@ -31,11 +32,23 @@ export type Props = {
     };
 };
 
+const sum = (readings: Reading[]) => readings.map((i) => i.active_power).reduce((accumulator, current) => accumulator + current);
+
 export default function Dashboard() {
     const { props } = usePage<Props>();
 
-    useEcho('power', 'ReadingsSimulated', (e) => {
-        console.log(e);
+    const [distribution, setDistribution] = useState({
+        production: 0,
+        consumption: 0,
+        utility_grid: 0,
+    });
+
+    useEcho('power', 'ReadingsSimulated', (e: { readings: Reading[] }) => {
+        setDistribution({
+            production: sum(e.readings.filter((i) => i.type === 'production')),
+            consumption: sum(e.readings.filter((i) => i.type === 'consumption')),
+            utility_grid: sum(e.readings.filter((i) => i.type === 'utility_grid')),
+        });
     }).listen();
 
     return (
@@ -75,12 +88,12 @@ export default function Dashboard() {
                             <CardContent className="space-y-4">
                                 <div className="flex items-center justify-between gap-x-4">
                                     <div className="text-3xl font-bold" style={{ fontFamily: 'Inter, sand-serif' }}>
-                                        100%
+                                        0%
                                     </div>
-                                    <div className="text-sm text-gray-500">11 hours left estimated</div>
+                                    <div className="text-sm text-gray-500">0 hours remaining</div>
                                 </div>
 
-                                <Progress value={100} className="h-4 rounded" />
+                                <Progress value={0} className="h-4 rounded bg-red-500/20" />
                             </CardContent>
                         </Card>
 
@@ -91,7 +104,7 @@ export default function Dashboard() {
                             </CardHeader>
 
                             <CardContent className="h-full">
-                                <SolarPVSystem />
+                                <SolarPVSystem distribution={distribution} />
                             </CardContent>
                         </Card>
                     </div>

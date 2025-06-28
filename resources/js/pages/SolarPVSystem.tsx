@@ -1,48 +1,17 @@
 import CustomNode from '@/pages/CustomNode';
 import ReactFlow, { Edge, MarkerType, Node, NodeTypes } from 'reactflow';
 
-const nodes: Node<{ title: string; value: string; image: string }>[] = [
-    {
-        id: 'solar',
-        position: { x: 125, y: 0 },
-        data: {
-            title: 'Solar Production',
-            value: '2000',
-            image: '/images/solar-panel.png',
-        },
-        type: 'custom',
-    },
-    {
-        id: 'grid',
-        position: { x: 0, y: 100 },
-        data: { title: 'Grid', value: '?', image: '/images/electricity.png' },
-        type: 'custom',
-    },
-    {
-        id: 'battery',
-        position: { x: 250, y: 100 },
-        data: { title: 'Battery', value: '0', image: '/images/full-battery.png' },
-        type: 'custom',
-    },
-    {
-        id: 'home',
-        position: { x: 125, y: 200 },
-        data: { title: 'Home', value: '5000', image: '/images/business.png' },
-        type: 'custom',
-    },
-];
-
 const edges: Edge[] = [
     {
         id: 's->h',
-        source: 'solar',
-        target: 'home',
+        source: 'production',
+        target: 'consumption',
         animated: true,
     },
     {
         id: 'g->h',
-        source: 'grid',
-        target: 'home',
+        source: 'utility_grid',
+        target: 'consumption',
         animated: true,
         label: 'Consuming',
         markerEnd: { type: MarkerType.Arrow },
@@ -50,17 +19,50 @@ const edges: Edge[] = [
     {
         id: 'b->h',
         source: 'battery',
-        target: 'home',
-        animated: true,
-        label: 'Discharging',
+        target: 'consumption',
+        animated: false,
         markerEnd: { type: MarkerType.Arrow },
+        style: {
+            strokeDasharray: '5,5',
+        },
     },
 ];
 
 const nodeTypes: NodeTypes = {
     custom: CustomNode,
 };
-const SolarPVSystem = () => {
+const SolarPVSystem = ({ distribution }: { distribution: { production: number; consumption: number; utility_grid: number } }) => {
+    const nodes: Node<{ title: string; value: number; image: string }>[] = [
+        {
+            id: 'production',
+            position: { x: 125, y: 0 },
+            data: {
+                title: 'Solar Production',
+                value: distribution.production,
+                image: '/images/solar-panel.png',
+            },
+            type: 'custom',
+        },
+        {
+            id: 'utility_grid',
+            position: { x: 0, y: 100 },
+            data: { title: 'Grid', value: distribution.utility_grid, image: '/images/electricity.png' },
+            type: 'custom',
+        },
+        {
+            id: 'battery',
+            position: { x: 250, y: 100 },
+            data: { title: 'Battery', value: 0, image: '/images/battery.png' },
+            type: 'custom',
+        },
+        {
+            id: 'consumption',
+            position: { x: 125, y: 200 },
+            data: { title: 'Home', value: distribution.consumption, image: '/images/business.png' },
+            type: 'custom',
+        },
+    ];
+
     return (
         <ReactFlow
             className="m-0 p-0"
