@@ -56,12 +56,12 @@ export const columns = (setData: InertiaFormProps<{ id: number; on: boolean }>['
                 <div className="flex justify-center">
                     {row.original.on ? (
                         <>
-                            <Button className="rounded-none rounded-l bg-green-500 uppercase hover:bg-green-500">on</Button>
+                            <Button className="cursor-pointer rounded-none rounded-l bg-green-500 uppercase hover:bg-green-500">on</Button>
 
                             <Button
                                 onClick={() => setData({ id: row.original.id, on: false })}
                                 variant="outline"
-                                className="rounded-none rounded-r uppercase"
+                                className="hover:bg-background cursor-pointer rounded-none rounded-r uppercase"
                             >
                                 off
                             </Button>
@@ -71,11 +71,11 @@ export const columns = (setData: InertiaFormProps<{ id: number; on: boolean }>['
                             <Button
                                 onClick={() => setData({ id: row.original.id, on: true })}
                                 variant="outline"
-                                className="rounded-none rounded-l uppercase"
+                                className="hover:bg-background cursor-pointer rounded-none rounded-l uppercase"
                             >
                                 on
                             </Button>
-                            <Button className="rounded-none rounded-r bg-red-500 uppercase hover:bg-red-500">off</Button>
+                            <Button className="cursor-pointer rounded-none rounded-r bg-red-500 uppercase hover:bg-red-500">off</Button>
                         </>
                     )}
                 </div>

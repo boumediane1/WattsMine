@@ -85,14 +85,14 @@ export default function Monitoring() {
                 <h2 className="text-xl font-semibold tracking-tight">Monitoring</h2>
 
                 <h3 className="text-lg font-semibold tracking-tight">Production circuits</h3>
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     {productionCircuits.map((item, index) => (
                         <MonitoringCard key={index} {...item} />
                     ))}
                 </div>
 
                 <h3 className="text-lg font-semibold tracking-tight">Consumption circuits</h3>
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     {consumptionCircuits.map((item, index) => (
                         <MonitoringCard key={index} {...item} />
                     ))}

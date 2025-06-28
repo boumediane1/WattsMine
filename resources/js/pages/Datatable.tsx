@@ -24,7 +24,6 @@ export function DataTable({ readings }: { readings: Reading[] }) {
 
     useEffect(() => {
         if (data.id) {
-            console.log('hi');
             patch(`breakers/${data.id}`, {
                 preserveState: true,
             });
