@@ -17,10 +17,10 @@ The development of solar energy creates a need for solutions to better manage en
 
 ## Project Objectives
 
-- Real-time tracking of solar panel performance.
-- Identifying energy-intensive devices.
-- Remote control of circuits.
-- User-friendly interface accessible to non-technical users.
+- Monitor the performance of photovoltaic panels in real-time to optimize production and ensure service continuity.
+- Identify the most energy-consuming devices to target corrective actions and reduce unnecessary consumption.
+- Control circuits remotely, safely, for greater responsiveness and better operational management.
+- Make the interface intuitive to ensure easy handling by all users, whether technical or non-technical.
 
 # Slide 4
 
