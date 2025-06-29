@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Le développement de l'énergie solaire crée un besoin de solutions pour mieux gérer la production et la consommation d'énergie.
+The development of solar energy creates a need for solutions to better manage energy production and consumption.
 
 # Slide 2
 
@@ -49,4 +49,4 @@ Le développement de l'énergie solaire crée un besoin de solutions pour mieux 
 
 ## Conclusion
 
-Ce projet a permis de créer une application pour suivre et contrôler l’énergie en temps réel, tout en favorisant le confort et les économies.
+This project led to the creation of an application to monitor and control energy in real-time, while promoting comfort and savings.
