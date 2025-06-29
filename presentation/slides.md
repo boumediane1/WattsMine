@@ -48,3 +48,5 @@ Le développement de l'énergie solaire crée un besoin de solutions pour mieux 
 ## Demonstration
 
 ## Conclusion
+
+Ce projet a permis de créer une application pour suivre et contrôler l’énergie en temps réel, tout en favorisant le confort et les économies.

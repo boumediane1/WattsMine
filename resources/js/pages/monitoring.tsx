@@ -3,7 +3,7 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem, Reading } from '@/types';
 import { Head } from '@inertiajs/react';
 import { useEcho } from '@laravel/echo-react';
-import { SunMedium } from 'lucide-react';
+import { Microwave, Refrigerator, SunMedium, Tv, WashingMachine, Wifi } from 'lucide-react';
 import { JSX, useState } from 'react';
 import 'reactflow/dist/style.css';
 
@@ -32,23 +32,23 @@ export const icons: Record<string, { component: JSX.Element; color: string }> = 
         color: 'bg-green-600',
     },
     Refrigerator: {
-        component: <SunMedium className="size-6" />,
+        component: <Refrigerator className="size-6" />,
         color: 'bg-blue-500',
     },
     'Living Room TV': {
-        component: <SunMedium className="size-6" />,
+        component: <Tv className="size-6" />,
         color: 'bg-purple-500',
     },
     'Washing Machine': {
-        component: <SunMedium className="size-6" />,
+        component: <WashingMachine className="size-6" />,
         color: 'bg-orange-500',
     },
     'Microwave Oven': {
-        component: <SunMedium className="size-6" />,
+        component: <Microwave className="size-6" />,
         color: 'bg-red-500',
     },
     'Wi-Fi & Devices': {
-        component: <SunMedium className="size-6" />,
+        component: <Wifi className="size-6" />,
         color: 'bg-sky-500',
     },
 };
