@@ -22,9 +22,9 @@ The development of solar energy creates a need for solutions to better manage en
 - Remote control of circuits.
 - User-friendly interface accessible to non-technical users.
 
-## Technology Stack
-
 # Slide 4
+
+## Technology Stack
 
 - Laravel
 - React
