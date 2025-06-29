@@ -19,16 +19,7 @@ test('authenticated users can visit the dashboard', function () {
     $this->get('/dashboard')->assertOk();
 });
 
-test('calculates real time total active power from solar arrays', function () {
-});
-
-test('calculates real time total consumption', function () {
-});
-
-test('retrieves real time utility grid active power', function () {
-});
-
-test('test dashboard shows correct power production and consumption by hour', function () {
+test('confirms that the dashboard accurately displays power production and consumption data by hour', function () {
     $this->actingAs(User::factory()->create());
     $this->withoutExceptionHandling();
 
@@ -82,7 +73,7 @@ test('test dashboard shows correct power production and consumption by hour', fu
     );
 });
 
-test('test dashboard shows total power for production and consumption in real time', function () {
+test('ensures that the dashboard shows the correct total power for both production and consumption in real-time', function () {
     $this->actingAs(User::factory()->create());
     seed(CircuitSeeder::class);
     $this->withoutExceptionHandling();
@@ -131,7 +122,7 @@ test('test dashboard shows total power for production and consumption in real ti
     );
 });
 
-test('test utility grid\'s active power is correctly computed', function () {
+test('verifies that the active power from the utility grid is computed correctly', function () {
     $this->actingAs(User::factory()->create());
 
     $simulation = app(SimulationService::class);
@@ -175,7 +166,7 @@ test('test utility grid\'s active power is correctly computed', function () {
     ]);
 });
 
-test('test reading latest circuits\' readings', function () {
+test('ensures that the latest readings from all circuits are retrieved and displayed correctly', function () {
     $this->actingAs(User::factory()->create());
 
     seed(CircuitSeeder::class);
@@ -222,4 +213,3 @@ test('test reading latest circuits\' readings', function () {
         ],
     ]);
 });
-

@@ -6,9 +6,8 @@ use App\Models\Reading;
 use App\Models\User;
 use App\Services\SimulationService;
 
-test('test updates circuit status', function () {
+test('verifies that the circuit status is updated correctly', function () {
     $this->actingAs(User::factory()->create());
-    $this->withoutExceptionHandling();
 
     Circuit::query()->create([
         'title' => 'Circuit',
@@ -26,7 +25,7 @@ test('test updates circuit status', function () {
     expect($circuit->on)->toBeFalse();
 });
 
-test('test readings are ordered by type then by title', function () {
+test('ensures that readings are correctly ordered first by type and then by title', function () {
     $this->actingAs(User::factory()->create());
 
     Circuit::query()->create([
@@ -112,7 +111,7 @@ test('test readings are ordered by type then by title', function () {
     ]);
 });
 
-test('test active power is set to zero when circuit is turned off', function () {
+test('confirms that the active power is set to zero when the circuit is turned off', function () {
     $this->actingAs(User::factory()->create());
 
     $simulation = app(SimulationService::class);
